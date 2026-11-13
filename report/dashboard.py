@@ -251,7 +251,10 @@ class Report(CombinedComponent):
 
 
 # Initialize a fasthtml app
-app = FastHTML(hdrs=(picolink,))
+# The charts are drawn with black text on a transparent background,
+# so the page always uses Pico's light theme (otherwise a browser in
+# dark mode shows black text on a dark background).
+app = FastHTML(hdrs=(picolink,), htmlkw={'data-theme': 'light'})
 
 # Initialize the `Report` class
 report = Report()

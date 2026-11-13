@@ -4,6 +4,9 @@
 
 GitHub: [https://github.com/lucasnvieira](https://github.com/lucasnvieira)
 
+[![Tests](https://github.com/lucasnvieira/dsnd-dashboard-project/actions/workflows/test.yml/badge.svg)](https://github.com/lucasnvieira/dsnd-dashboard-project/actions/workflows/test.yml)
+[![Lint](https://github.com/lucasnvieira/dsnd-dashboard-project/actions/workflows/lint.yml/badge.svg)](https://github.com/lucasnvieira/dsnd-dashboard-project/actions/workflows/lint.yml)
+
 How productive is an employee or a team, and how likely is that person (or team) to be recruited by a competitor? In this project, I built a reusable Python package that answers the data part of these questions with SQL, and a FastHTML dashboard that managers can use to see the answer in one page.
 
 ![Employee view of the dashboard](docs/dashboard_employee.png)
@@ -231,6 +234,7 @@ The model is loaded only once, as the class attribute `predictor`, through `load
 
 - **Color scale on the model chart.** The bar color comes from the `RdYlGn_r` colormap (green = low risk, yellow = medium, red = high), and a color bar under the chart explains the scale. The bar also shows the value as a percentage, so the manager does not need to read the axis.
 - **Dynamic title.** The header changes between "Employee Performance" and "Team Performance" based on the filter.
+- **Readable in any browser theme.** The charts have black text on a transparent background, so in a browser set to dark mode they were almost invisible. I set the page to Pico's light theme (`htmlkw={'data-theme': 'light'}` in the `FastHTML` app), so the dashboard looks the same for every user.
 
 ![Team view of the dashboard](docs/dashboard_team.png)
 
@@ -251,10 +255,10 @@ The model is loaded only once, as the class attribute `predictor`, through `load
 - `test_db_exists`: the database file exists;
 - `test_employee_table_exists`, `test_team_table_exists`, `test_employee_events_table_exists`: the three tables the dashboard depends on are in the database.
 
-Two GitHub Actions workflows run on every push (and pull request) to `main`:
+Two GitHub Actions workflows run on every push (and pull request) to `main`. They are in the [`.github/workflows`](.github/workflows) folder (a folder whose name starts with a dot, so some file explorers hide it), and every run is listed in the [Actions tab](https://github.com/lucasnvieira/dsnd-dashboard-project/actions) of this repository:
 
-- **Tests** (`test.yml`): installs Python 3.10, builds the package, installs `requirements.txt` and runs `pytest`.
-- **Lint** (`lint.yml`): runs `flake8`. The `.flake8` file excludes the course-provided folders (`src`, `report/base_components`, `report/combined_components`) so the check focuses on the code I wrote, and allows the `from fasthtml.common import *` style used by the FastHTML documentation.
+- **Tests** ([`.github/workflows/test.yml`](.github/workflows/test.yml)): installs Python 3.10, builds the package, installs `requirements.txt` and runs `pytest`.
+- **Lint** ([`.github/workflows/lint.yml`](.github/workflows/lint.yml)): runs `flake8`. The `.flake8` file excludes the course-provided folders (`src`, `report/base_components`, `report/combined_components`) so the check focuses on the code I wrote, and allows the `from fasthtml.common import *` style used by the FastHTML documentation.
 
 I updated the workflows from `actions/checkout@v2`/`setup-python@v2` to `v4`/`v5`, because the `v2` actions run on a Node.js version that GitHub has deprecated. I kept Python 3.10, the version used by the course, but let GitHub pick the latest 3.10 patch release instead of pinning `3.10.10`.
 
