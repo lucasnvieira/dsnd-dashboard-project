@@ -1,5 +1,7 @@
 from fasthtml.common import *
 import matplotlib.pyplot as plt
+import tempfile
+from pathlib import Path
 
 # Import QueryBase, Employee, Team from employee_events
 from employee_events import QueryBase, Employee, Team  # noqa: F401
@@ -254,7 +256,13 @@ class Report(CombinedComponent):
 # The charts are drawn with black text on a transparent background,
 # so the page always uses Pico's light theme (otherwise a browser in
 # dark mode shows black text on a dark background).
-app = FastHTML(hdrs=(picolink,), htmlkw={'data-theme': 'light'})
+# FastHTML stores its session key in a `.sesskey` file. Keeping it in the
+# system temp folder means no key file is ever created in the project.
+app = FastHTML(
+    hdrs=(picolink,),
+    htmlkw={'data-theme': 'light'},
+    key_fname=str(Path(tempfile.gettempdir()) / 'employee_dashboard.sesskey'),
+)
 
 # Initialize the `Report` class
 report = Report()

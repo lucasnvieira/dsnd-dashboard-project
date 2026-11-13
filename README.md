@@ -235,6 +235,7 @@ The model is loaded only once, as the class attribute `predictor`, through `load
 - **Color scale on the model chart.** The bar color comes from the `RdYlGn_r` colormap (green = low risk, yellow = medium, red = high), and a color bar under the chart explains the scale. The bar also shows the value as a percentage, so the manager does not need to read the axis.
 - **Dynamic title.** The header changes between "Employee Performance" and "Team Performance" based on the filter.
 - **Readable in any browser theme.** The charts have black text on a transparent background, so in a browser set to dark mode they were almost invisible. I set the page to Pico's light theme (`htmlkw={'data-theme': 'light'}` in the `FastHTML` app), so the dashboard looks the same for every user.
+- **No stray files when the app runs.** FastHTML writes a session key file (`.sesskey`) in the folder where the app starts. I moved it to the system temp folder (`key_fname` in the `FastHTML` app), so running the dashboard never leaves a key file in the project. `.sesskey` is also listed in `.gitignore`.
 
 ![Team view of the dashboard](docs/dashboard_team.png)
 
