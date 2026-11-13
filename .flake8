@@ -1,0 +1,18 @@
+[flake8]
+# Starter components provided by the course are kept as delivered,
+# so linting focuses on the code written for this project.
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    .venv,
+    build,
+    dist,
+    src,
+    report/base_components,
+    report/combined_components
+per-file-ignores =
+    # package/namespace re-exports
+    __init__.py: F401, F403
+    # FastHTML documentation style uses `from fasthtml.common import *`
+    report/dashboard.py: F403, F405

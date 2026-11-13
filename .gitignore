@@ -160,3 +160,8 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+# Keep the built employee_events package (required by the project)
+!python-package/dist/
+
+# FastHTML session key created when the app runs locally
+.sesskey

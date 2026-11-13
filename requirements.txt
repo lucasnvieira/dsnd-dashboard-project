@@ -1,3 +1,4 @@
+# Project dependencies (Python 3.10 or newer)
 scikit-learn==1.5.2
 python-fasthtml==0.8.0
 matplotlib==3.9.2
@@ -7,4 +8,15 @@ pandas==2.2.3
 pytest
 flake8
 ipython
-#### Add text to install the python-package here
+
+# python-fasthtml 0.8.0 does not pin these libraries, and their newer
+# releases break the app (missing `sqlite_minutils`, Starlette `on_startup`
+# error, XML rendering error). Pinning them keeps the environment
+# reproducible.
+fastcore==1.7.20
+fastlite==0.0.13
+starlette==0.41.2
+uvicorn==0.32.0
+
+# Install the employee_events package built in python-package/dist
+./python-package/dist/employee_events-0.0.tar.gz
